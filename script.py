@@ -62,7 +62,8 @@ def api_vegetables():
 
     return jsonify(all_vegetables)
 
-app.run()
+if __name__ == '__main__':
+    app.run()
 
 """
     API Endpoints
