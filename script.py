@@ -16,12 +16,19 @@ def dict_factory(cursor, row):
         d[col[0]] = row[idx]
     return d
 
+def set_headers():
+    response = flask.Response()
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
 @app.route('/', methods=['GET'])
 def home():
+    set_headers()
     return '''<h1>Products API</h1><p>An API to show demands for products according to number mentions.</p>'''
 
 @app.route('/api/products/all', methods=['GET'])
 def api_all():
+    set_headers()
     conn = sqlite3.connect('products.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
@@ -37,6 +44,7 @@ def page_not_found(e):
 
 @app.route('/api/products=fruits', methods=['GET'])
 def api_fruits():
+    set_headers()
     conn = sqlite3.connect('products.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
@@ -46,6 +54,7 @@ def api_fruits():
 
 @app.route('/api/products=cerials', methods=['GET'])
 def api_cerials():
+    set_headers()
     conn = sqlite3.connect('products.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
@@ -55,6 +64,7 @@ def api_cerials():
 
 @app.route('/api/products=vegetables', methods=['GET'])
 def api_vegetables():
+    set_headers()
     conn = sqlite3.connect('products.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
